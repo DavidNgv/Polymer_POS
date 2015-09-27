@@ -1,0 +1,150 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/more-routing/more-route.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-autogrow-textarea.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+
+<link rel="import" href="../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+
+
+
+<polymer-element name="page-presqu-accident">
+  <template>
+  <style>
+    :host {
+      /*padding: 16px;*/
+      /*margin: 4px;*/
+    }
+
+    paper-button[raised].blue {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    paper-button[raised].red {
+      background: red;
+      color: #fff;
+    }
+
+    paper-input-decorator {
+      /*width: 90%;*/
+      /*margin: auto;*/
+    }
+
+    .content-wrapper {
+      /*margin: 16px;*/
+      width: 90%;
+      /*margin: 12px;*/
+    }
+
+    paper-fab {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+    }
+
+  </style>
+
+    <more-route context name="presquaccident"></more-route>
+
+    <section layout vertical fit>
+      <core-header-panel flex mode="seamed" id="headerPanel">
+        <core-toolbar>
+          <div>Presqu'accident</div>
+        </core-toolbar>
+
+        <div class="content" layout vertical center>
+          <div class="content-wrapper" vertical>
+            <paper-input-decorator label="Date :" floatingLabel>
+              <input id="date" is="core-input" type="date">
+              </input>
+            </paper-input-decorator>
+
+            <paper-input-decorator label="Lieu :" floatingLabel>
+              <input id="lieu" is="core-input">
+              </input>
+            </paper-input-decorator>
+
+            <paper-input-decorator label="Description des faits :" floatingLabel>
+              <paper-autogrow-textarea>
+                <textarea id="desc"></textarea>
+              </paper-autogrow-textarea>
+            </paper-input-decorator>
+
+            <paper-input-decorator label="Action imm&eacute;diate :" floatingLabel>
+              <paper-autogrow-textarea>
+                <textarea id="action"></textarea>
+              </paper-autogrow-textarea>
+            </paper-input-decorator>
+
+            <br /> 
+            <br /> 
+            <br /> 
+            <br /> 
+            <br /> 
+            <br /> 
+            <label for="upload">Photos</label>
+            <!-- <paper-button raised class="blue" id="upload">Upload photos</paper-button> -->
+            <paper-icon-button icon="cloud-upload" title="upload" id="upload" on-tap="{{takePicture}}"></paper-icon-button>
+
+            <br /> 
+            <br /> 
+            <paper-button raised class="blue" id="apercu">aperçu</paper-button>
+            <paper-button raised class="blue" id="apercu">Envoyer</paper-button>
+            <br />
+            <br />
+            <paper-fab icon="home" title="accueil" on-tap="{{goHome}}">accueil</paper-fab>
+          </div>
+        </div>
+      </core-header-panel>
+
+    </section>
+
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+        //...
+      },
+
+      goHome: function() {
+        MoreRouting.navigateTo('index');
+      },
+
+      takePicture : function () {
+          console.log('come takePicture');
+          
+          var options = {
+              quality: 45,
+              targetWidth: 1000,
+              targetHeight: 1000,
+              destinationType: Camera.DestinationType.FILE_URI,
+              encodingType: Camera.EncodingType.JPEG,
+              sourceType: Camera.PictureSourceType.CAMERA
+          };
+
+          navigator.camera.getPicture(
+              function (imageURI) {
+                  console.log(imageURI);
+                  //upload(imageURI, menuItem);
+              },
+              function (message) {
+                  // We typically get here because the use canceled the photo operation. Fail silently.
+              }, options);
+
+          return false;
+      }
+
+    });
+  </script>
+</polymer-element>
+

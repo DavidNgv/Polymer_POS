@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+
+  <!-- Add to homescreen meta -->
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="bower_components/more-routing/more-route-selector.html">
+
+    <link rel="stylesheet" href="css/global.css">
+
+    <!--
+    `routes.html` configures more-routing, and specifies all of the named routes
+    for this application. Take a look at it.
+    -->
+    <link rel="import" href="routes.html">
+    <link rel="import" href="page-login.html">
+    <link rel="import" href="page-loading.html">
+    <link rel="import" href="page-index.html">
+  </head>
+  <body>
+    <template is="auto-binding" id="app">
+
+      <!--
+      more-routing exposes a `urlFor` helper that will construct a URL for a
+      particular route (and params).
+      -->
+      <a href="{{urlFor('login')}}" class="header" paper-font-style="display-2">Jodomax</a>
+
+      <div class="app-content" paper-font-style="body-1">
+        <!--
+        `more-route-selector` manages any element that extends `core-selector`,
+        allowing you to associate each with a route. By default, it looks for
+        the `route` attribute on each item in the `core-selector`. You can see
+        an example of that default behavior in `polyfora-user.html`.
+
+        In this example, we have opted to construct our base pages such that
+        they declare _routing contexts_. Each element declares the route that it
+        represents, and `more-route-selector` uses this to select the correct
+        route to display.
+
+        See each page's `<more-route context ...>`.
+        -->
+        <more-route-selector selectedParams="{{params}}">
+          <core-animated-pages>
+            <page-login></page-login>
+            <page-loading></page-loading>
+            <page-index></page-index>
+          </core-animated-pages>
+        </more-route-selector>
+
+      </div>
+
+    </template>
+
+    <script type="text/javascript">
+      var app = document.querySelector('#app');
+
+      addEventListener('template-bound', function(ev) {
+        MoreRouting.navigateTo('login');
+
+        setTimeout(function() {
+          MoreRouting.navigateTo('loading');
+        }, 1000);
+
+        setTimeout(function() {
+          MoreRouting.navigateTo('index');
+        }, 5000);
+      });
+
+
+
+    </script>
+  </body>
+</html>

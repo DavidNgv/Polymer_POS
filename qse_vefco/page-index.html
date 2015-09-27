@@ -1,0 +1,64 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/more-routing/more-route.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="page-index">
+  <template>
+  <style>
+    :host {
+      padding: 16px;
+      margin: 4px;
+    }
+
+    paper-button[raised].blue {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    paper-button[raised].red {
+      background: red;
+      color: #fff;
+    }
+
+    .button-section {
+      width: 300px;
+      /*margin: 4px;*/
+      padding: 20px;
+    }
+
+
+  </style>
+
+    <more-route context name="index"></more-route>
+
+    <section layout vertical fit center-justified center >
+      <h1>QSE VEFCO</h1>
+      <div layout vertical class="button-section">
+        <paper-button raised class="red" on-tap="{{goPresQuAccident}}">Presqu'accident</paper-button>
+        <br />
+        <paper-button raised class="blue">Audit QSE</paper-button>
+        <br />
+        <paper-button raised class="red">Ev&egrave;nment QSE</paper-button>
+        <br />
+        <paper-button raised class="blue">1/4h se&eacute;curit&eacute;</paper-button>
+        <br />
+        <paper-button raised class="blue">Flashs info</paper-button>
+      <div>
+    </section>
+
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+        //...
+      },
+
+      goPresQuAccident: function() {
+        MoreRouting.navigateTo('presquaccident');
+      }
+    });
+  </script>
+</polymer-element>
+

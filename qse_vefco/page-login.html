@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/more-routing/more-route.html">
+
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+
+<polymer-element name="page-login">
+  <template>
+    <style type="text/css">
+    :host {
+      margin-bottom: 100px;
+    }
+
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    .login-section {
+      width: 200px;
+      height: 200px;
+    }
+
+    </style>
+    <more-route context name="login"></more-route>
+    
+    <section layout vertical center-justified center fit>
+      <div class="login-section">
+        <h1 style="text-align: center;">QSE VEFCO</h1>
+        
+        <paper-input-decorator label="Login" floatingLabel>
+          <input id="username" is="core-input">
+          </input>
+        </paper-input-decorator>
+
+        <paper-input-decorator label="Mdp" floatingLabel>
+          <input id="password" is="core-input" type="password">
+          </input>
+        </paper-input-decorator>
+
+        <div layout horizontal center-justified style="margin-top: 30px;">
+          <paper-button raised class="colored" on-tap="{{login}}">Connexion</paper-button>
+        </div>
+      </div>
+    </section>
+
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+        //...
+      },
+
+      login: function() {
+        MoreRouting.navigateTo('index');
+      }
+    });
+  </script>
+</polymer-element>
+

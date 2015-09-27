@@ -1,0 +1,45 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/more-routing/more-route.html">
+<link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
+
+<polymer-element name="page-loading">
+  <template>
+  <style>
+  :host {
+    padding: 16px;
+    margin: 4px;
+  }
+
+
+  paper-spinner.blue::shadow .circle {
+    border-color: #4285f4;
+  }
+
+  paper-spinner.red::shadow .circle {
+    border-color: #db4437;
+  }
+
+  paper-spinner.yellow::shadow .circle {
+    border-color: #f4b400;
+  }
+
+  paper-spinner.green::shadow .circle {
+    border-color: #0f9d58;
+  }
+  </style>
+
+    <more-route context name="loading"></more-route>
+    <section layout vertical center center-justified fit>
+      <paper-spinner class="blue" active></paper-spinner>
+    </section>
+
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+        //...
+      }
+    });
+  </script>
+</polymer-element>
+

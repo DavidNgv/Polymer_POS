@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jodomax App1</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <!-- Add to homescreen meta -->
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+  <!-- Add to homescreen for Internet Explorer -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3F51B5">
+
+  <meta name="theme-color" content="#303F9F">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- Conditionally load WC polyfills -->
+  <!-- Thanks to https://github.com/geelen/x-gif for the snippet -->
+  <script>
+    if ('registerElement' in document
+      && 'createShadowRoot' in HTMLElement.prototype
+      && 'import' in document.createElement('link')
+      && 'content' in document.createElement('template')) {
+      // We're using a browser with native WC support!
+    } else {
+      document.write('<script src="/bower_components/webcomponentsjs/webcomponents.js"><\/script>');
+    }
+  </script>
+
+
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="import" href="bower_components/more-routing/more-route-selector.html">
+
+  <link href="elements/routes.html" rel="import">
+  <link href="elements/dash-board.html" rel="import">
+  <link href="elements/jodomax-login.html" rel="import">
+
+  <style type="text/css">
+      body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      font-size: 14px;
+      margin: 0;
+      padding: 24px;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+</style>
+<script>
+    window.addEventListener('polymer-ready', function(e) {
+        setTimeout(function(){
+          console.log('come here');
+          MoreRouting.navigateTo('login');
+        }, 1000);
+    });
+  </script>
+
+</head>
+
+<body fullbleed>
+   <more-route-selector selectedParams="{{params}}">
+   		<core-animated-pages transitions="hero-transition cross-fade">
+        <dash-board></dash-board>
+			  <jodomax-login></jodomax-login>
+      </core-animated-pages>
+    </more-route-selector>
+</body>

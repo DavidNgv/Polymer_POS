@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 1. Load platform support before any code that touches the DOM. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <!-- 2. Load the component using an HTML Import -->
+    <link rel="import" href="bower_components/polymer/layout.html">
+    <link rel="import" href="bower_components/core-media-query/core-media-query.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <style type="text/css">
+      core-header-panel[mode=cover]::shadow #mainContainer {
+        left: 180px;
+      }
+/*      .content {
+        margin: 60px 180px 60px 0;
+      }
+*/      .demo {
+        background-color: #ccc;
+        margin: 12px;
+        padding: 4px;
+      }
+      .demo div {
+        background-color: white;
+        margin: 4px;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body fullbleed layout vertical>
+    <core-header-panel flex mode="waterfall-tall">
+      <core-toolbar>
+        <core-icon-button icon="menu">
+        </core-icon-button>
+        <div class="bottom indent">JODOMAX</div>
+      </core-toolbar>
+      <div class="content">
+        <div class="demo" horizontal layout>
+          <div>One</div>
+          <div>Two</div>
+          <div>Three</div>
+        </div>
+
+        <div class="demo" horizontal layout>
+          <div>Alpha</div>
+          <div flex>Beta (flex)</div>
+          <div>Gamma</div>
+        </div>
+
+        <div class="demo" vertical layout style="height:250px">
+          <div>Alpha</div>
+          <div flex>Beta (flex)</div>
+          <div>Gamma</div>
+        </div>
+
+        <div class="demo" horizontal layout>
+          <div flex three>Alpha</div>
+          <div flex>Beta</div>
+          <div flex two>Gamma</div>
+        </div>
+
+
+        <template is="auto-binding">
+          <core-media-query query="max-width: 640px"
+                        queryMatches="{{phoneScreen}}"></core-media-query>
+          <div class="demo" layout vertical?="{{phoneScreen}}"
+               horizontal?="{{!phoneScreen}}">
+            <div auto-vertical>Alpha</div>
+            <div auto-vertical>Beta</div>
+            <div auto-vertical>Gamma</div>
+          </div>
+        </template>
+
+        <div class="demo" horizontal layout style="height: 200px;">
+          <div>Stretch Fill</div>
+        </div>
+
+        <div class="demo" horizontal layout style="height: 200px;" center>
+          <div>Center</div>
+        </div>
+        <div class="demo" horizontal layout style="height: 200px;" start>
+          <div>Start</div>
+        </div>
+        <div class="demo" horizontal layout style="height: 200px;" end>
+          <div>End</div>
+        </div>
+        <div class="demo" horizontal start-justified layout>
+          <div>start-justified</div>
+        </div>
+        <div class="demo" horizontal center-justified layout>
+          <div>center-justified</div>
+        </div>
+        <div class="demo" horizontal end-justified layout>
+          <div>end-justified</div>
+        </div>
+        <div class="demo" horizontal justified layout>
+          <div>justified</div>
+          <div>justified</div>
+          <div>justified</div>
+        </div>
+        <div class="demo" horizontal around-justified layout>
+          <div>around-justified</div>
+          <div>around-justified</div>
+        </div>
+        <div class="demo" horizontal layout style="height: 200px;">
+          <div flex self-start>Alpha</div>
+          <div flex self-center>Beta</div>
+          <div flex self-end>Gamma</div>
+          <div flex self-stretch>Delta</div>
+        </div>
+        <div class="demo" horizontal layout wrap style="width: 220px">
+          <div>Alpha</div>
+          <div>Beta</div>
+          <div>Gamma</div>
+          <div>Delta</div>
+        </div>
+        <div class="demo" horizontal layout reverse>
+          <div>Alpha</div>
+          <div>Beta</div>
+          <div>Gamma</div>
+          <div>Delta</div>
+        </div>
+      </div>
+    </core-header-panel>
+  </body>
+</html>

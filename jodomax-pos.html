@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+
+  <!-- Add to homescreen meta -->
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- 1. Load platform support before any code that touches the DOM. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/polymer/layout.html">
+
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+
+    <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+
+    <link rel="import" href="bower_components/core-ajax/core-ajax.html">
+
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-input-decorator.html">
+    
+    <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+
+
+    <link href="bower_components/core-collapse/core-collapse.html" rel="import">
+    <link href="bower_components/core-menu/core-menu.html" rel="import">
+    <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
+    <link href="bower_components/paper-item/paper-item.html" rel="import">
+    <link href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+    
+    <link href="bower_components/paper-fab/paper-fab.html" rel="import">
+
+    <link href="bower_components/core-media-query/core-media-query.html" rel="import">
+
+    <link href="bower_components/paper-slider/paper-slider.html" rel="import">
+
+    <link href="bower_components/core-a11y-keys/core-a11y-keys.html" rel="import">
+
+    <link href="bower_components/paper-dialog/paper-dialog.html" rel="import">
+    <link href="bower_components/paper-dialog/paper-action-dialog.html" rel="import">
+
+    <link href="bower_components/paper-tabs/paper-tabs.html" rel="import">
+    <link href="bower_components/core-animated-pages/core-animated-pages.html" rel="import">
+    
+
+    <!-- 2. Load the component using an HTML Import -->
+    <link rel="import" href="bill-details.html">
+
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="jaydata-1.3.6/jaydata.js"></script>
+
+    <!-- <link href="print.css" rel="stylesheet" type="text/css" media="print"/> -->
+
+    <style type="text/css">
+      .bill {
+        /*border: 1px solid #000;*/
+        /*border-radius: 5%;*/
+        background-color: transparent;
+        margin: 10px;
+        border-radius: 1em;
+      }
+
+      .bill-preview {
+        /*background-color: transparent;*/
+        margin: 10px;
+        border-radius: 1em;
+        width: 500px;
+        height: 600px;
+      }
+
+      .bill-toolbar {
+        background-color: gray;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        height: 40px;
+      }
+
+      .bill-summary {
+        background-color: gray;
+        /*margin: 12px;*/
+        padding: 4px;
+        /*border-radius: 5%;*/
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+        height: 36px;
+      }
+
+/*      .demo {
+        margin: 4px;
+        padding: 4px;
+      }
+*/    
+      .demo div {
+        margin: 4px;
+        padding: 4px;
+      }
+
+      .bill-toolbar-header {
+        margin: 1px;
+        padding: 4px;
+      }
+
+      #list {
+        background-color: white;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+      }
+
+      #list a {
+        color: #666666;
+        text-decoration: none;
+      }
+      .a-row {
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        background-color: white;
+      }
+
+      .a-row.selected{
+        background-color: #eee;
+      }
+
+      .row {
+        /*padding: 16px 16px;*/
+        margin: 4px;
+        padding: 12px;
+        height: 24px;
+      }
+      .row-inner div{
+        cursor: pointer;
+      }
+/*      .row-inner div {
+        margin: 4px;
+        padding: 12px;
+      }
+*/    
+      .right-align{
+        text-align: right;
+      }
+
+      .right-bottom-align {
+        text-align: right;
+      }
+
+      .border {
+        border-bottom: 1px dotted #DDD;
+      }
+
+      core-toolbar {
+        background-color: #5264ae;
+      }
+
+/*      #list a:nth-of-type(1n) .row {
+        background-color: #FCE4EC;
+      }
+      #list a:nth-of-type(2n) .row {
+        background-color: #F8BBD0;
+      }
+      #list a:nth-of-type(3n) .row {
+        background-color: #F48FB1;
+      }
+      #list a:nth-of-type(4n) .row {
+        background-color: #F06292;
+      }
+      #list a:nth-of-type(5n) .row {
+        background-color: #EC407A;
+      }
+*/
+      .add-section {
+        /*border: 1px solid black;*/
+        background-color: white;
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        /*border-radius: 1em;*/
+      }
+
+      .discount-section {
+        background-color: white;
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      .payment-section {
+        background-color: white;
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        /*border-radius: 1em;*/
+      }
+
+      .item-code {
+        width: 20%;
+      }
+
+      .item-name {
+        width: 70%;
+      }
+
+      .advance-input {
+        width: 50%;
+      }
+
+      html /deep/ paper-dropdown-menu {
+        box-sizing: border-box;
+        width: 80px;
+      }
+
+      html /deep/ core-menu {
+        box-sizing: border-box;
+        width: 80px;
+      }
+
+      paper-item {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      html /deep/ core-collapse {
+        border: 1px solid #ccc;
+        padding: 8px;
+      }
+
+      html /deep/ core-overlay {
+        border: 1px solid #ccc;
+        padding: 8px;
+        background: #fff;
+      }
+
+      .constrained-height {
+        height: 150px;
+      }
+
+      .colored {
+        color: #0f9d58;
+      }
+
+      .dropdown.colored::shadow #ripple,
+      .dropdown.colored::shadow #background {
+        border: 1px solid #0f9d58;
+        background-color: #b7e1cd;
+      }
+
+      body {
+        background-color: #bcbcbc;
+        font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      }
+
+      paper-fab {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+
+      paper-fab.add {
+        background: #5677fc;
+      }
+
+      paper-fab.edit {
+        background: green;
+      }
+
+      paper-fab.cancel {
+        background: gray;
+        right: 140px;
+      }
+
+      paper-fab.delete {
+        background: red;
+        right: 78px;
+      }
+
+      paper-slider {
+        width: 100%;
+      }
+
+      html /deep/ [autofocus] {
+        color: #03a9f4;
+      }
+
+      paper-tabs {
+        background-color: #00bcd4;
+        color: #fff;
+        box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
+      }
+      
+    </style>
+  </head>
+
+  <body unresolved fullbleed layout vertical>
+    <template id="app" is="auto-binding">
+
+      <core-toolbar>
+        <core-icon-button icon="menu">
+        </core-icon-button>
+        <img src="images/logo_2015_8.png">
+        <span flex></span>
+        <core-icon-button icon="save" on-tap="{{saveToBillToDatabase}}"></core-icon-button>
+        <core-icon-button icon="print" on-tap="{{printInvoice}}"></core-icon-button>
+      </core-toolbar>
+      
+      <core-media-query query="max-width: 768px"
+                        queryMatches="{{tabletScreen}}" on-core-media-change="{{onCoreMediaChange}}"></core-media-query>
+
+      <div layout horizontal?="{{!tabletScreen}}" vertical?="{{tabletScreen}}" flex>
+        <paper-shadow flex one layout vertical class="bill" z="3">
+          <div flex layout vertical>
+            <core-header-panel flex mode="seamed" id="headerPanel">
+
+              <core-toolbar class="bill-toolbar">
+                <div class="bill-toolbar-header" horizontal layout fit>
+                  <div flex four>Name</div>
+                  <div flex two class="right-align">Price</div>
+                  <div flex one class="right-align">Qty</div>
+                  <div flex one class="right-align">Disc</div>
+                  <div flex two class="right-align">Amount</div>
+                </div>
+              </core-toolbar>
+
+              <div class="content">
+                <core-list id="list" data="{{sales_items}}" 
+                    on-core-activate="{{onListSelect}}"
+                    fit>
+                  <template>
+                    <div class="a-row {{selected?'selected':''}}">
+                      <div class="row border" layout vertical>
+                        <div class"row-inner" layout horizontal>
+                          <div flex four>{{model.name}} {{model.size.label}} {{model.color.label}}</div>
+                          <div flex two class="right-align">{{model.priceText}}</div>
+                          <div flex one class="right-align">{{model.qty}}</div>
+                          <div flex one class="right-align">{{model.disc}}%</div>
+                          <div flex two class="right-align">{{model.amountText}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </core-list>
+              </div>
+
+            </core-header-panel>
+          </div>
+
+          <div class="bill-summary" layout vertical>
+            <div class="bill-toolbar-header" horizontal layout>
+              <div flex four>Total</div>
+              <div flex two class="right-align"></div>
+              <div flex one class="right-align">{{billQty}}</div>
+              <div flex one class="right-align"></div>
+              <div flex two class="right-align">{{formatMoneyStr(billTotal)}}</div>
+            </div>
+
+          </div>
+        </paper-shadow>
+
+        <div flex one layout vertical>
+          <paper-shadow layout vertical class="add-section" z="3">
+            <paper-input id="item_name" label="Name" disabled class="item-name"></paper-input>
+
+            <div layout horizontal justified>
+              <paper-input id="item_code" label="Item Code" floatingLabel class="item-code" disabled?="{{isEditItem}}">
+                <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onItemCodeKeyPress}}"></core-a11y-keys>
+              </paper-input>
+
+              <select id="item_size">
+                <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onSizeKeyPress}}"></core-a11y-keys>
+                <option value="0"></option>
+                <template repeat="{{sizes}}">
+                  <option value="{{code}}">{{label}}</option>
+                </template>
+              </select>
+
+              <select id="item_color">
+                <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onColorKeyPress}}"></core-a11y-keys>
+                <option value="0"></option>
+                <template repeat="{{colors}}">
+                  <option value="{{code}}">{{label}}</option>
+                </template>
+              </select>
+
+              <paper-input-decorator label="Qty" floatingLabel>
+                <input id="qty" is="core-input" type="number">
+                  <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onQtyKeyPress}}"></core-a11y-keys>
+                </input>
+              </paper-input-decorator>
+
+<!--               <paper-dropdown-menu label="Size">
+                <paper-dropdown class="dropdown">
+                  <core-menu class="menu">
+                    <template repeat="{{sizes}}">
+                      <paper-item>{{}}</paper-item>
+                    </template>
+                  </core-menu>
+                </paper-dropdown>
+              </paper-dropdown-menu>
+ -->
+<!--               <paper-dropdown-menu label="Color">
+                <paper-dropdown class="dropdown">
+                  <core-menu class="menu">
+                    <template repeat="{{colors}}">
+                      <paper-item>{{}}</paper-item>
+                    </template>
+                  </core-menu>
+                </paper-dropdown>
+              </paper-dropdown-menu>
+ -->
+            </div>
+
+            <paper-fab icon="add" class="add" title="add" on-tap="{{addNewItem}}" hidden?="{{isEditItem || !isAddNewItem}}"></paper-fab>
+            <paper-fab icon="create" class="edit" title="edit" on-tap="{{saveEditItem}}" hidden?="{{!isEditItem}}"></paper-fab>
+            <!-- <paper-fab class="cancel" title="cancel">4</paper-fab> -->
+            <paper-fab icon="delete" class="delete" title="delete" on-tap="{{deleteEditItem}}" hidden?="{{!isEditItem}}"></paper-fab>
+          </paper-shadow>
+
+          <paper-shadow layout vertical z="3" class="discount-section">
+            <div layout horizontal justified>
+              <paper-input-decorator label="Discount %" floatingLabel>
+                <input is="core-input" type="number" value="{{billDiscPercent}}" id="bill_disc_percent">
+                  <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillDiscPercentKeyPress}}"></core-a11y-keys>
+                </input>
+              </paper-input-decorator>
+              <paper-input-decorator label="Discount Amount" floatingLabel>
+                <input is="core-input" type="number" value="{{billDiscAmount}}" id="bill_disc_amount">
+                  <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillDiscAmountKeyPress}}"></core-a11y-keys>
+                </input>
+
+              </paper-input-decorator>
+            </div>
+          </paper-shadow>
+
+          <paper-shadow layout vertical z="3" class="payment-section">
+            <paper-tabs selected="{{payment_selected}}">
+              <paper-tab>Payment</paper-tab>
+              <paper-tab>Advance Payment</paper-tab>
+            </paper-tabs>            
+
+            <core-animated-pages selected="{{payment_selected}}" transitions="hero-transition cross-fade" style="height:70px;">
+              <section>
+                <div layout horizontal justified cross-fade>
+                  <paper-input-decorator label="Cash" floatingLabel>
+                    <input is="core-input" type="number" value="{{billCash}}" id="bill_cash">
+                      <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillCashKeyPress}}"></core-a11y-keys>
+                    </input>
+
+                  </paper-input-decorator>
+                  <paper-input-decorator label="Card" floatingLabel>
+                    <input is="core-input" type="number" value="{{billCard}}" id="bill_card">
+                      <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillCardKeyPress}}"></core-a11y-keys>
+                    </input>
+                  </paper-input-decorator>
+                </div>
+              </section>
+
+              <section>
+                <div layout horizontal justified cross-fade>
+                  <paper-input-decorator label="Advance Cash" floatingLabel class="advance-input">
+                    <input is="core-input" type="number" value="{{billAdvanceCash}}" id="bill_advance_cash">
+                      <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillAdvanceCashKeyPress}}"></core-a11y-keys>
+                    </input>
+
+                  </paper-input-decorator>
+                  <paper-input-decorator label="Advance Card" floatingLabel class="advance-input">
+                    <input is="core-input" type="number" value="{{billAdvanceCard}}" id="bill_advance_card">
+                      <core-a11y-keys id="a11y" keys="{{keys_listen}}" on-keys-pressed="{{onBillAdvanceCardKeyPress}}"></core-a11y-keys>
+                    </input>
+                  </paper-input-decorator>
+                  <paper-input-decorator label="Total Due" floatingLabel class="advance-input">
+                    <input is="core-input" type="number" value="{{billTotalDue}}" id="bill_total_due" disabled>
+                  </paper-input-decorator>
+                </div>
+              </section>
+            </core-animated-pages>
+
+          </paper-shadow>
+        </div>
+
+      </div>
+
+      <paper-action-dialog backdrop autoCloseDisabled layered="false" id="dialog_2">
+        <div id="print_content">
+          <style>
+            table {
+              width: 500px;
+            }
+            table {
+                border: 2px solid black;
+                border-collapse: collapse;
+                margin: auto;
+            }
+
+            th {
+                border: 1px solid black;
+                padding: 15px;
+            }
+
+            td {
+                border: 1px solid black;
+                padding: 15px;
+            }
+
+            .text-left-align {
+              text-align: left;
+            }
+            .text-right-align {
+              text-align: right;
+            }
+          </style>
+
+          <section id="table_section"></section>
+          <section id="space_section"></section>
+          <h5 style="text-align: center;">Cảm ơn và hẹn gặp lại quý khách !</h5>
+        </div>
+
+        <paper-button dismissive>Cancel</paper-button>
+        <paper-button affirmative autofocus on-tap="{{printInvoice}}">Print</paper-button>
+      </paper-action-dialog>
+
+      <paper-action-dialog backdrop autoCloseDisabled layered="false" id="confirm_delete_item">
+        <div>
+          Are you sure to delete item ?
+        </div>
+
+        <paper-button dismissive>Cancel</paper-button>
+        <paper-button affirmative autofocus on-tap="{{okToDeleteItem}}">Delete</paper-button>
+      </paper-action-dialog>
+
+    </template>
+
+    <script type="text/javascript">
+      addEventListener('template-bound', function(ev) {
+        app.$.item_code.focus();
+
+        setTimeout(function() {
+          app.updateBillTotal();
+        }, 200);
+
+      });
+
+      var app = document.querySelector('#app');
+
+      app.init = function() {
+        app.sizes = [
+          {"code": "1", "label": "S"},
+          {"code": "2", "label": "M"},
+          {"code": "3", "label": "L"},
+          {"code": "4", "label": "XL"}
+        ];
+
+        app.colors = [
+          {"code": "1", "label": "Blue"},
+          {"code": "2", "label": "Red"},
+          {"code": "3", "label": "Violet"},
+          {"code": "4", "label": "Yellow"},
+          {"code": "5", "label": "Brown"},
+          {"code": "6", "label": "Black"},
+          {"code": "7", "label": "White"}
+        ];
+
+        app.menu_items = [
+          {
+            "index": 0,
+            "code": "D001",
+            "name": "Đầm liền sọc gấm",
+            "price": 595000,
+            "disc": 0
+          },
+          {
+            "index": 1,
+            "code": "D002",
+            "name": "Đầm liền hai mảnh",
+            "price": 500000,
+            "disc": 5
+          }
+        ];
+
+        app.sales_items = [
+          {
+            "code": "D001",
+            "name": "Đầm liền sọc gấm",
+            "price": 595000,
+            "priceText": "595.000",
+            "qty": 1,
+            "size": {"code": 1, "label": "S"},
+            "color": {"code": 2, "label": "Red"},
+            "disc": 0,
+            "amount": 595000,
+            "amountText": "595.000",
+          },
+          {
+            "code": "D002",
+            "name": "Đầm liền hai mảnh",
+            "price": 500000,
+            "priceText": "500.000",
+            "qty": 2,
+            "size": {"code": 2, "label": "M"},
+            "color": {"code": 1, "label": "Blue"},
+            "disc": 5,
+            "amount": 950000,
+            "amountText": "950.000",
+          }
+        ];
+
+        app.isEditItem = false;
+        app.isAddNewItem = false;
+        app.payment_selected = 0;
+
+        app.billTotal = 0;
+        app.billQty = 0;
+        app.billDiscPercent = 0;
+        app.billDiscAmount = 0;
+
+        app.billCash = 0;
+        app.billCard = 0;
+        app.billAdvanceCash = 0;
+        app.billAdvanceCard = 0;
+
+        app.billTotalDue = 0;
+
+        app.keys_listen = "enter";
+      }
+
+      app.onCoreMediaChange = function() {
+        //app.$.list.updateSize();
+      }
+
+      app.onItemCodeKeyPress = function(ev) {
+        //console.log(ev.detail.key);
+
+        var item_code = app.$.item_code.value;
+
+        var found_item;
+        found_item = app.findItemWithCode(app.menu_items, item_code);
+
+        if (found_item) {
+          app.add_new_item = found_item;
+
+          app.$.item_name.value = found_item.name;
+          app.$.qty.value = 1;
+
+          app.isAddNewItem = true;
+
+          app.$.item_size.focus();
+        }
+      }
+
+      app.onQtyKeyPress = function(ev) {
+        if (app.isAddNewItem) {
+          app.addNewItem();
+        } else if (app.isEditItem) {
+          app.saveEditItem();
+        }
+      }
+
+      app.onBillDiscPercentKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onBillDiscAmountKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onBillCashKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onBillCardKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onBillAdvanceCashKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onBillAdvanceCardKeyPress = function(ev) {
+        app.updateBillTotal();
+      }
+
+      app.onListSelect = function(ev) {
+        app.editSelectItem();
+      }
+
+      app.addNewItem = function() {
+        if (app.add_new_item) {
+          var current_item = app.add_new_item; 
+          var sales_items_len = app.sales_items.length;
+
+          var qty = app.$.qty.value;
+          // var disc = current_item.disc;
+          // var amount = ( qty * current_item.price)*(100-disc)/100;
+          var amount = app.calculateItemAmount(current_item, qty);
+
+          var found_size;
+          var found_color;
+
+          found_size = app.findItemWithCode(app.sizes, app.$.item_size.value);
+          found_color = app.findItemWithCode(app.colors, app.$.item_color.value);
+
+          var new_sales_item = {
+              "client_ID": app.generateUUID(),
+              "code":  current_item.code,
+              "name": current_item.name,
+              "price": current_item.price,
+              "priceText": app.formatMoneyStr(current_item.price).toString(),
+              "disc": current_item.disc,
+              "qty": parseInt(qty),
+              "amount": amount,
+              "amountText": app.formatMoneyStr(amount).toString(),
+              "size": found_size,
+              "color": found_color
+          }
+
+          app.sales_items.push(new_sales_item);
+
+          //app.$.list.refresh();
+          //app.$.list.scrollToItem(app.sales_items.length);
+
+          app.updateBillTotal();
+          app.clearAddNewItem();
+        }
+      }
+
+      app.editSelectItem = function() {
+        var current_item = app.$.list.selection;
+        if (current_item) {
+          app.$.item_code.value = current_item.code;
+          app.$.item_name.value = current_item.name;
+
+          app.$.item_size.value = current_item.size.code;
+          app.$.item_color.value = current_item.color.code;
+
+          app.$.qty.value = current_item.qty;
+
+          app.isEditItem = true;
+
+          app.$.item_size.focus();
+        }
+      }
+
+      app.saveEditItem = function() {
+        if (app.$.list.selection) {
+          var qty = app.$.qty.value;
+          var amount = app.calculateItemAmount(app.$.list.selection, qty);
+
+          app.$.list.selection.qty = qty;
+          app.$.list.selection.amount = amount;
+          app.$.list.selection.amountText = app.formatMoneyStr(amount).toString();
+                    
+
+
+          app.$.list.selection.size = app.findItemWithCode(app.sizes, app.$.item_size.value);
+          app.$.list.selection.color = app.findItemWithCode(app.colors, app.$.item_color.value);
+
+          app.updateBillTotal();
+          app.cancelEditItem();
+        }
+      }
+
+      app.cancelEditItem = function() {
+        app.isEditItem = false;
+        app.$.list.clearSelection();
+
+        app.clearItemForm();
+      }
+
+      app.deleteEditItem = function() {
+        app.$.confirm_delete_item.toggle();
+      }
+
+      app.okToDeleteItem = function() {
+        if (app.$.list.selection) {
+          var index = app.indexOfItemWithAttr(app.sales_items, 'client_ID', app.$.list.selection.client_ID)
+          if (index > -1) {
+            app.sales_items.splice(index, 1);
+            app.updateBillTotal();
+          }
+
+          app.cancelEditItem();
+        }
+      }
+
+      app.calculateItemAmount = function(current_item, qty) {
+          var disc = current_item.disc;
+          var amount = ( qty * current_item.price)*(100-disc)/100;
+
+          return amount;
+      }
+
+      app.findItemWithCode = function(items_list, code) {
+        var res = null;
+        items_list.forEach(function(each_item){
+          if (each_item.code==code) {
+            res = each_item;
+          }
+        });
+        return res;
+      }
+
+      app.indexOfItemWithAttr = function(items_list, attr, attr_value) {
+        var res = -1;
+        var index = -1;
+
+        items_list.forEach(function(each_item){
+          index ++;
+          if (each_item[attr]==attr_value) {
+            res = index;
+          }
+        });
+        return res;
+      }
+
+      app.clearAddNewItem = function () {
+        app.add_new_item = null;
+        app.isAddNewItem = false;
+
+        app.clearItemForm();
+      }
+
+      app.clearItemForm = function() {
+        app.$.item_code.value = '';
+        app.$.item_name.value = '';
+        app.$.item_size.value = 0;
+        app.$.item_color.value = 0;
+        app.$.qty.value = 0;
+
+        setTimeout(function() {
+          app.$.item_code.focus();
+        }, 100);
+      }
+
+      app.generateUUID = function() {
+        var res = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });        
+        return res;
+      }
+
+      app.updateBillTotal = function() {
+        var total_amount_origin = 0;
+        var total_amount = 0;
+        var total_amount_discountable = 0;
+        var total_qty = 0;
+        var total_disc = 0;
+        var total_disc_by_item = 0;
+        var total_payment = 0;
+        var total_due = 0;
+
+        var discPercent = app.$.bill_disc_percent.value;
+        var discAmount = app.$.bill_disc_amount.value;
+
+        var billCash = app.$.bill_cash.value;
+        var billCard = app.$.bill_card.value;
+
+        var billAdvanceCash = app.$.bill_advance_cash.value;
+        var billAdvanceCard = app.$.bill_advance_card.value;
+
+        app.sales_items.forEach(function(each_item){
+          total_amount_origin += each_item.qty * each_item.price; 
+          total_amount += each_item.amount;
+          total_qty += each_item.qty;
+
+          if (each_item.disc==0) {
+            total_amount_discountable += each_item.amount; 
+          }
+        });
+
+        total_disc_by_item = total_amount_origin - total_amount;
+        total_disc = ((total_amount_discountable * discPercent)/100) + parseFloat(discAmount);
+        total_payment = total_amount - total_disc;
+
+        if (billAdvanceCash>0 || billAdvanceCard>0) {
+          billCash = 0;
+          billCard = 0;
+        } else {
+          if (billCard>0) {
+            billCash = total_payment - billCard;
+          } else {
+            billCash = total_payment;
+            billCard = 0;
+          }
+        }
+
+        total_due = total_payment - billCash - billCard - billAdvanceCash - billAdvanceCard;
+
+        app.billTotalAmountOrigin = total_amount_origin;
+        app.billTotal = total_amount;
+        app.billTotalDisc = total_disc_by_item + total_disc;
+
+        app.billTotalPayment = total_payment;
+
+        app.billQty = total_qty;
+        app.billCash = billCash;
+        app.billCard = billCard;
+
+        app.billTotalDue = total_due;
+      }
+
+
+      app.showDialog = function() {
+        app.$.dialog_2.toggle();
+      }
+
+      app.genTable = function() {
+        var table_section = app.$.table_section;
+        var table = document.getElementById("preview_table");
+        if (table) {
+          table_section.removeChild(table);
+        }
+
+        table = document.createElement("table");
+        table.setAttribute("id","preview_table");
+
+        var tr = document.createElement("tr");
+        var th1 = document.createElement("th");
+        var th2 = document.createElement("th");
+        var th3 = document.createElement("th");
+        var th4 = document.createElement("th");
+        var th5 = document.createElement("th");
+
+        th2.setAttribute("class","text-right-align");
+        th3.setAttribute("class","text-right-align");
+        th4.setAttribute("class","text-right-align");
+        th5.setAttribute("class","text-right-align");
+
+        th1.appendChild(document.createTextNode('Tên'));
+        th2.appendChild(document.createTextNode('Đơn giá'));
+        th3.appendChild(document.createTextNode('SL'));
+        th4.appendChild(document.createTextNode('KM'));
+        th5.appendChild(document.createTextNode('Thành tiền'));
+
+        tr.appendChild(th1);
+        tr.appendChild(th2);
+        tr.appendChild(th3);
+        tr.appendChild(th4);
+        tr.appendChild(th5);
+
+        table.appendChild(tr);
+
+        app.sales_items.forEach(function(each_item){
+
+          var tr = document.createElement("tr");
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          var td3 = document.createElement("td");
+          var td4 = document.createElement("td");
+          var td5 = document.createElement("td");
+
+          var name = document.createTextNode(each_item.name);
+          var price = document.createTextNode(app.formatMoneyStr(each_item.price));
+          var qty = document.createTextNode(each_item.qty);
+          var disc = document.createTextNode(each_item.disc + "%");
+          var amount = document.createTextNode(app.formatMoneyStr(each_item.amount));
+
+          td1.appendChild(name);
+          td2.appendChild(price);
+          td3.appendChild(qty);
+          td4.appendChild(disc);
+          td5.appendChild(amount);
+
+          td2.setAttribute("class","text-right-align");
+          td3.setAttribute("class","text-right-align");
+          td4.setAttribute("class","text-right-align");
+          td5.setAttribute("class","text-right-align");
+
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tr.appendChild(td4);
+          tr.appendChild(td5);
+
+          table.appendChild(tr);
+        });
+
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        td2.setAttribute("colspan","4");
+        td2.setAttribute("class","text-right-align");
+
+        td1.appendChild(document.createTextNode('Tiền hàng'));
+        td2.appendChild(document.createTextNode(app.formatMoneyStr(app.billTotalAmountOrigin)));
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table.appendChild(tr);
+
+        if (app.billTotalDisc > 0) {
+          tr = document.createElement("tr");
+          td1 = document.createElement("td");
+          td2 = document.createElement("td");
+          td2.setAttribute("colspan","4");
+          td2.setAttribute("class","text-right-align");
+
+          td1.appendChild(document.createTextNode('Khuyến mại'));
+          td2.appendChild(document.createTextNode(app.formatMoneyStr(app.billTotalDisc)));
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          table.appendChild(tr);
+        }
+
+        tr = document.createElement("tr");
+        td1 = document.createElement("th");
+        td2 = document.createElement("th");
+
+        td1.setAttribute("class","text-left-align");
+        td2.setAttribute("colspan","4");
+        td2.setAttribute("class","text-right-align");
+
+        td1.appendChild(document.createTextNode('Tổng tiền'));
+        td2.appendChild(document.createTextNode(app.formatMoneyStr(app.billTotalPayment)));
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table.appendChild(tr);
+
+        table_section.appendChild(table);
+
+        var space_height = 500 - app.sales_items.length * 50;
+        if (space_height <0) {
+          space_height = 100;
+        }
+        app.$.space_section.setAttribute("style", "height: " + space_height + "px;");
+
+      }
+
+      app.printInvoice = function() {
+        app.genTable();
+
+        var d = new Date();
+        var print_date_time = d.toLocaleDateString() + " " + d.toLocaleTimeString();
+
+        var printContent = document.getElementById('print_content');
+
+        var print_html = '<html> \
+          <head> \
+            <style> \
+              body { \
+                background-color: #fff !important; \
+              } \
+            </style> \
+          </head> \
+          <body>';
+
+          print_html += ' \
+          <h2 style="text-align: center;">Jodomax Boutique</h2> \
+          <div style="text-align: center;"><i>Địa chỉ: 84 Cầu Giấy, Hà Nội</i></div> \
+          <div style="text-align: center;"><i>Số điện thoại: 09 13 59 33 33</i></div> \
+          <h3 style="text-align: center;">HÓA ĐƠN BÁN LẺ</h3> \
+          <div style="text-align: center;">Tên thu ngân: Nguyễn Văn Hưng<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Ngày: ' + print_date_time +'</div> \
+          <br /> \
+          ';
+
+          print_html += printContent.innerHTML;
+          print_html += "</body></html>";
+
+        var myWindow = window.open('','','width=1000,height=800');
+        myWindow.document.write(print_html);
+
+        myWindow.focus();
+        myWindow.print(); 
+
+        myWindow.close();
+      }
+
+      app.init();
+
+      Number.prototype.formatMoney = function(c, d, t){
+        var n = this, 
+            c = isNaN(c = Math.abs(c)) ? 2 : c, 
+            d = d == undefined ? "." : d, 
+            t = t == undefined ? "," : t, 
+            s = n < 0 ? "-" : "", 
+            i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+            j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+      };
+
+      app.formatMoneyStr = function(val) {
+        return (val).formatMoney(0, ',', '.');
+      }
+
+      //console.log((123456789.12345).formatMoney(2, ',', '.'));
+      $data.Entity.extend("SalesDetail", {
+          Id: { type: "int", key: true, computed: true },
+          Name: { type: String, required: true, maxLength: 50 },
+          Price: { type: Number, required: true},
+          Qty: { type: Number, required: true},
+          Disc: { type: Number, required: true},
+          Attrs: { type: String, required: true, maxLength: 50 },
+          Sales: { type: "Sales", required: true, inverseProperty: "SalesDetails"}
+      });
+
+      $data.Entity.extend("Sales", {
+          Id: { type: "int", key: true, computed: true },
+          SalesDate: { type: Date },
+          Completed: { type: Boolean },
+          DiscPercent: { type: Number, required: true},
+          DiscAmount: { type: Number, required: true},
+          Cash: { type: Number, required: true},
+          Card: { type: Number, required: true},
+          AdvanceCash: { type: Number, required: true},
+          AdvanceCard: { type: Number, required: true},
+          SalesDetails: { type: Array, elementType: SalesDetail, inverseProperty: "Sales" }
+      });
+
+      $data.Entity.extend("Attribute", {
+          Id: { type: "int", key: true, computed: true },
+          Label: { type: String, required: true, maxLength: 50 }
+      });
+
+      $data.EntityContext.extend("JodomaxDatabase", {
+          Sales: { type: $data.EntitySet, elementType: Sales },
+          SalesDetails: { type: $data.EntitySet, elementType: SalesDetail }
+      });
+
+      app.jodomaxDB = new JodomaxDatabase("JodomaxDatase");
+
+      app.jodomaxDB.onReady(function() {
+          console.log('db ready to use');
+      });
+
+      app.saveToBillToDatabase = function() {
+        var db = app.jodomaxDB;
+
+        var newSales = new Sales({ 
+          SalesDate: new Date(), 
+          Completed: true,
+          DiscPercent: app.discPercent,
+          DiscAmount: app.discAmount,
+          Cash: app.billCash,
+          Card: app.billCard,
+          AdvanceCash: app.billAdvanceCash,
+          AdvanceCard: app.billAdvanceCard
+        });
+
+        db.add(newSales);
+        db.saveChanges().then(function() { 
+          var salesDetailData = [];
+
+          app.sales_items.forEach(function(each_item){
+            salesDetailData.push({
+              Name: each_item.name,
+              Price: each_item.price,
+              Qty: each_item.qty,
+              Disc: each_item.disc,
+              Attrs: each_item.size.code + ',' + each_item.color.code,
+              Sales: newSales
+            });
+          });
+
+          var salesDetails = db.SalesDetails.addMany(salesDetailData);
+          db.saveChanges(function() {
+              console.log('save done');
+          });
+        });
+      }
+
+    </script>
+  </body>
+</html>

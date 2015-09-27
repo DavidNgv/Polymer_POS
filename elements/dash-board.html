@@ -1,0 +1,23 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="../bower_components/more-routing/more-route.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+
+<polymer-element name="dash-board">
+	<template>
+		    <more-route context name="index" params="{{params}}"></more-route>
+
+	<core-toolbar>
+	    <core-icon-button icon="menu"></core-icon-button>
+	    <span flex>Jodomax</span>
+	    <core-icon-button icon="refresh"></core-icon-button>
+	    <core-icon-button icon="add"></core-icon-button>
+	</core-toolbar>
+  </template>
+  <script>
+    Polymer({
+      // properties and methods here
+    });
+  </script>
+</polymer-element>

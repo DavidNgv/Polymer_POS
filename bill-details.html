@@ -1,0 +1,29 @@
+<link rel="import"
+      href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-list/core-list.html">
+
+<polymer-element name="bill-details" attributes="contacts">
+  <template>
+
+    <core-list id="list" data="{{contacts}}" fit>
+      <template>
+        <a href="#">
+          <div class="row" layout horizontal center>
+            <core-image src="{{model.avatar}}" preload sizing="cover">
+            </core-image>
+            <div flex>{{model.name}}</div>
+          </div>
+        </a>
+      </template>
+    </core-list>
+    
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+        //...
+      }
+    });
+  </script>
+</polymer-element>
+

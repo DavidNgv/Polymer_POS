@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <link href="../bower_components/font-roboto/roboto.html" rel="import">
+  <link href="../bower_components/paper-input/paper-autogrow-textarea.html" rel="import">
+  <link href="../bower_components/paper-input/paper-input-decorator.html" rel="import">
+  <link href="../bower_components/paper-input/paper-input.html" rel="import">
+  <link href="../bower_components/paper-input/paper-char-counter.html" rel="import">
+
+  <link rel="import" href="../bower_components/more-routing/more-route.html">
+  <style shim-shadowdom>
+
+  </style>
+
+</head>
+<polymer-element name="jodomax-login">
+  <template>
+    <style>
+      section {
+        padding: 20px 0;
+      }
+
+      section > div {
+        padding: 14px;
+        font-size: 16px;
+      }
+
+      paper-input {
+        width: 80%;
+      }
+
+      paper-input-decorator {
+        max-width: 80%;
+      }
+
+      @media only screen and (min-width : 320px) {
+        paper-input {
+          width: 100%;
+        }
+
+        paper-input-decorator {
+          max-width: 100%;
+        }
+      }
+
+      paper-input.narrow {
+        width: 150px;
+      }
+    </style>
+
+    <more-route context name="login" params="{{params}}"></more-route>
+
+    <section cross-fade>
+      <paper-input-decorator label="User Name" floatingLabel error="input is required!">
+        <input is="core-input">
+      </paper-input-decorator>
+
+      <paper-input-decorator label="Password" floatingLabel error="input is required!">
+        <input type="password" is="core-input" required>
+      </paper-input-decorator>
+    </section>
+  </template>
+  <script>
+    Polymer({
+      // properties and methods here
+    });
+  </script>
+</polymer-element>
